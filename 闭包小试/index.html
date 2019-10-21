@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>闭包</title>
+		<style type="text/css">
+			p{
+				background: gold;
+			}
+		</style>
+	</head>
+	<body onload="init()">
+		<p>下标0</p>
+		<p>下标1</p>
+		<p>下标2</p>
+		<p>下标3</p>
+		<p>下标4</p>
+	</body>
+	<script type="text/javascript">
+		function init() {
+			var pAry = document.getElementsByTagName('p');
+			for(var i = 0; i < pAry.length; i++) {
+				// 将变量i保存给在每个段落对象(p)上
+				// pAry[i].i = i;
+				// pAry[i].onclick = function() {
+				// 	alert(this.i);
+				// }
+				
+				// 将变量i保存在匿名函数自身
+				// (pAry[i].onclick = function() {
+				// 	alert(arguments.callee.i)
+				// }).i = i;
+				
+				// 加一层闭包,i以函数参数形式传递给内层函数
+				// (function(arg) {
+				// 	pAry[i].onclick = function () {
+				// 		alert(arg);
+				// 	};
+				// })(i); // 调用时参数
+				
+				// 加一层闭包,i以局部变量形式传递给内层函数
+				// (function() {
+				// 	var temp = i; // 调用时局部变量
+				// 	pAry[i].onclick = function () {
+				// 		alert(temp);
+				// 	}
+				// })();
+				
+				// 加一层闭包,返回一个函数作为响应事件(与3有区别)
+				// pAry[i].onclick = function (arg) {
+				// 	return function() { // 返回一个函数
+				// 		alert(arg);
+				// 	}
+				// }(i);
+				
+				// 用function实现,实际上每产生一个函数实例就会产生一个闭包
+				// pAry[i].onclick = new Function("alert("+ i +");"); // new一次就产生一个函数实例
+				
+				// 用function实现,与6有区别
+				pAry[i].onclick = Function('alert('+ i +')');
+			}
+		}
+	</script>
+</html>
